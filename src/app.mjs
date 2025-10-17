@@ -7,14 +7,14 @@ const app = express();
 
 // add rate limit
 const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000,
+  windowMs: 60 * 1000,
   max: 5,
 });
 
 // middlewares
 app.use(express.json());
-app.use(router);
 app.use(limiter);
+app.use(router);
 
 app.get("/", (req, res) => {
   res.send({ hng: "stage 1" });
