@@ -1,9 +1,15 @@
 export const getProfile = async (req, res) => {
   try {
-    const response = await fetch("https://catfact.ninja/fact");
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 5000); // 5s timeout
+
+    const response = await fetch("https://catfact.ninja/fact", {
+      signal: controller.signal,
+    });
+    clearTimeout(timeout);
 
     if (!response.ok) {
-      throw new Error("Cat API returned error");
+      throw new Error("Cat API returned bad response");
     }
 
     const data = await response.json();
