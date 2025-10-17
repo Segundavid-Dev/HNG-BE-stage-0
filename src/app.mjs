@@ -8,7 +8,7 @@ const app = express();
 // add rate limit
 const limiter = rateLimit({
   windowMs: 60 * 1000,
-  max: 5,
+  max: 1000,
 });
 
 // middlewares
